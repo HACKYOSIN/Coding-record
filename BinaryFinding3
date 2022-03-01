@@ -1,0 +1,42 @@
+#include<iostream>
+
+using namespace std;
+
+int search(int n,int k,int arr[]){
+    int left=-1;
+    int right=n;
+    int mid;
+    int index=n+1;
+    while(left+1!=right/*&& arr[right]>=k*/){
+        mid=left+((right-left)>>1);
+        if(arr[mid]==k){
+            
+            right=mid;
+        }
+        else if(arr[mid]>k){
+            right=mid;
+           
+        }
+        else{
+            left=mid;
+            
+        }
+        index=right+1;
+        
+    }
+    return index;
+}
+int main(){
+    int n,k;
+    cin>>n>>k;
+    
+    int *arr=new int[n];
+    
+    for(int i=0;i<n;i++){
+        cin>>arr[i];
+    }
+    int res=search( n,  k,  arr);
+    cout<<res;
+    delete[] arr;
+    return 0;
+}
