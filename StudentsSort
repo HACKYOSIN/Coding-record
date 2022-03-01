@@ -1,0 +1,109 @@
+/*#include<iostream>
+#include<algorithm>
+#include<cstdio>
+include<string>
+
+using namespace std;
+
+struct student{
+    string name;
+    int score;
+    int order;
+};
+
+bool up_sort(student a,student b){
+    if(a.score==b.score){
+        return a.order<b.order;
+    }
+    else{
+        return a.score<b.score;
+    }
+}
+
+bool down_sort(student a,student b){
+    if(a.score==b.score){
+        return a.order<b.order
+    }
+    else{
+        return a.score>b.score
+    }
+}
+
+const int maxnum=100;
+student arr[maxnum];
+
+int main(){
+    int n,m;
+    while(scanf("%d,%d",&n,&m)!=EOF){
+        for(int i=0;i<n;i++){
+            scanf("%s %d",&arr[i].name,&arr[i].score);
+            arr[i].order=i;
+        }
+        if(m){
+            sort(arr,arr+n,up_sort);
+        }
+        else{
+            sort(arr, arr+n,down_sort);
+        }
+        for(int i=0;i<n;i++){
+            printf("%s %d",&arr[i].name,arr[i].score)
+        }
+    }
+    return 0;
+}*/
+#include <iostream>
+#include <cstdio>
+#include <string>
+#include <algorithm>
+ 
+using namespace std;
+ 
+struct student{
+    char student_name[10];
+    int student_score;
+    int order;
+};
+ 
+//定义升序排序方式
+bool Compare_up(student x,student y){
+    //m=1,升序
+    if(x.student_score==y.student_score)
+        return x.order<y.order;
+    else
+        return x.student_score<y.student_score;
+ 
+}
+//定义降序排序方式
+bool Compare_down(student x,student y){
+    //m=0,降序
+    if(x.student_score==y.student_score)
+        return x.order<y.order;
+    else
+        return x.student_score>y.student_score;
+ 
+}
+ 
+const int Max=100;
+student arr[Max];
+ 
+int main()
+{
+    int n;
+    int m;
+    while(scanf("%d %d",&n,&m)!=EOF){
+        for(int i=0;i<n;i++){
+            scanf("%s %d",arr[i].student_name,&arr[i].student_score);
+            arr[i].order = i;
+        }
+        //排序,m=1表示升序排序
+        if(m)
+            sort(arr,arr+n,Compare_up);
+        else
+            sort(arr,arr+n,Compare_down);
+ 
+        for(int i=0;i<n;i++){
+            printf("%s %d\n",arr[i].student_name,arr[i].student_score);
+        }
+    }
+    return 0;
+}
