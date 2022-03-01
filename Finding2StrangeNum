@@ -1,0 +1,54 @@
+#include<iostream>
+#include<vector>
+using namespace std;
+int main(){
+    int n;
+    cin>>n;
+    vector<int>arr(n,0);
+    for(int i=0;i<n;i++){
+        cin>>arr[i];
+    }
+    int eor=0,eor2=0;
+    for(int i=0;i<n;i++){
+        eor^=arr[i];
+    }
+    int temp=eor&(~eor+1);
+    for(int i=0;i<n;i++){
+        if((arr[i]&temp)!=0){
+            eor2^=arr[i];
+        }
+    }
+    eor^=eor2;
+    if(eor<eor2){
+        cout<<eor<<" "<<eor2;
+    }
+    else{
+        cout<<eor2<<" "<<eor;
+    }
+}
+/*#include <iostream>
+#include <vector>
+using namespace std;
+
+int main() {
+    int cnt; 
+    cin >> cnt;
+    vector<int> arr(cnt, 0);
+    for(int i = 0; i < cnt; i++) {
+        cin >> arr[i];
+    }
+    
+    int eor = 0, eor2 = 0;
+    for(int i = 0; i < cnt; i++)
+        eor ^= arr[i];
+    
+    int temp = eor & (~eor + 1);
+    for(int i = 0; i < cnt; i++) {
+        if( (arr[i] & temp) != 0)
+            eor2 ^= arr[i];
+    }
+    if ((eor2 ^ eor) < eor2)
+        cout << (eor2 ^ eor) << " " << eor2 << endl;
+    else 
+        cout << eor2 << " " << (eor2 ^ eor) << endl;
+}*/
