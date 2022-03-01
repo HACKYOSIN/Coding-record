@@ -1,0 +1,58 @@
+#include<iostream>
+#include<vector>
+using namespace std;
+void swap(int a[],int i,int j){
+    if(i==j){
+        return;
+    }
+     a[i]=a[i]^a[j];
+     a[j]=a[i]^a[j];
+     a[i]=a[i]^a[j];
+}
+void heapinsert(int a[],int index){
+    while(a[index]>a[(index-1)/2]){
+        swap(a,index,(index-1)/2);
+        index=(index-1)/2;
+    }
+}
+
+void heapify(int a[],int index,int heapsize){
+    int left=index*2+1;
+    while(left<heapsize){
+        int largest=left+1<heapsize&&a[left]<a[left+1]?left+1:left;
+        largest=a[largest]<a[index]?index:largest;
+        if(largest==index){
+            break;
+        }
+        swap(a,index,largest);
+        index=largest;
+        left=index*2+1;
+    }
+}
+
+void heapsort(int a[],int heapsize){
+    if(a==NULL|heapsize<2){
+        return;
+    }
+    for(int i=0;i<heapsize;i++){
+        heapinsert(a,i);
+    }
+    while(heapsize>0){
+        swap(a, 0,--heapsize);
+        heapify(a,0,heapsize);
+    }
+}
+int main(){
+    int n;
+    cin>>n;
+    int a[n];
+    for(int i=0;i<n;i++){
+        cin>>a[i];
+    }
+    heapsort(a,n);
+    for(int i=0;i<n;i++){
+        cout<<a[i]<<" ";
+        
+    }
+    return 0;
+}
