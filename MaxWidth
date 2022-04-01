@@ -1,0 +1,60 @@
+/**
+ * struct TreeNode {
+ *	int val;
+ *	struct TreeNode *left;
+ *	struct TreeNode *right;
+ *	TreeNode(int x) : val(x), left(nullptr), right(nullptr) {}
+ * };
+ */
+class Solution {
+public:
+    /**
+     * 代码中的类名、方法名、参数名已经指定，请勿修改，直接返回方法规定的值即可
+     *
+     * 求这可树的最大宽度
+     * @param head TreeNode类 树的根节点
+     * @return int整型
+     */
+    int getMaxWidth(TreeNode* head) {
+        // write code here
+        if (!head)
+            return 0;
+        TreeNode* temp=head;
+        queue<TreeNode*>arr;
+        map<TreeNode*, int>level;
+        int nodelevel=1,tempwidth=0,currentlevel=0,maxwidth=0;
+        arr.push(temp);
+        level[temp] = nodelevel;
+        while(!arr.empty()){
+            temp=arr.front();
+            arr.pop();
+            nodelevel = level[temp];
+            if (nodelevel == currentlevel)
+            {
+                tempwidth++;
+            }
+             else
+            {
+                 if (tempwidth > maxwidth){
+                     maxwidth = tempwidth;
+                 }
+                 tempwidth = 1; 
+                 currentlevel++;
+            }
+            if(temp->left){
+                arr.push(temp->left);
+                level[temp->left]=1+nodelevel;
+                }
+            if(temp->right){
+                arr.push(temp->right);
+                level[temp->right]=1+nodelevel;
+            }
+           
+        }
+        if (tempwidth > maxwidth)
+                maxwidth = tempwidth;
+ 
+        return maxwidth;
+       
+    }
+};
