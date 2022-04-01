@@ -1,0 +1,47 @@
+/**
+ * struct TreeNode {
+ *	int val;
+ *	struct TreeNode *left;
+ *	struct TreeNode *right;
+ * };
+ */
+
+class Solution {
+public:
+    /**
+     * 
+     * @param root TreeNode类 the root of binary tree
+     * @return int整型vector<vector<>>
+     */
+    vector<int>pre_list,mid_list,last_list;
+    void pre(TreeNode* a){
+        if(a){
+            pre_list.push_back(a->val);
+            pre(a->left);
+            pre(a->right);
+        }
+    }
+    
+    void mid(TreeNode*a){
+        if(a){
+            mid(a->left);
+            mid_list.push_back(a->val);
+            mid(a->right);
+        }
+    }
+   
+    void last(TreeNode*a){
+        if(a){
+            last(a->left);
+            last(a->right);
+            last_list.push_back(a->val);
+        }
+    }
+    vector<vector<int> > threeOrders(TreeNode* root) {
+        // write code here
+        pre(root);
+        mid(root);
+        last(root);
+        return{pre_list,mid_list,last_list};
+    }
+};
