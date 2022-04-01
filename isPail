@@ -1,0 +1,37 @@
+/**
+ * struct ListNode {
+ *	int val;
+ *	struct ListNode *next;
+ * };
+ */
+
+class Solution {
+public:
+    /**
+     * 
+     * @param head ListNode类 the head
+     * @return bool布尔型
+     */
+    bool isPail(ListNode* head) {
+        // write code here
+        stack<ListNode*>stk;
+        ListNode*h=head;
+        if(h==nullptr){
+            return false;
+        }
+        while(h){
+            stk.push(h);
+            h=h->next;
+        }
+        h=head;
+        while(h){
+            if(stk.top()->val==h->val){
+                stk.pop();
+                h=h->next;
+            }
+            else 
+                return false;
+        }
+        return true;
+    }
+};
